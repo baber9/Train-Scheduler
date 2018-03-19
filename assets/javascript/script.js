@@ -68,18 +68,22 @@ var TrainStation = {
     // METHOD to add train to index.html and firebase
     addTrain: function (trainName, destination, firstTrainTime, tFrequency) {
         
-        // Call method tMinutes Until Arrival
-        var timeUntilArrival = this.tMinutesUntilArrival(firstTrainTime, tFrequency);
-        // Calls method next Train Arrival Time
-        var nextTrainTime = this.nextTrainArrivalTime(timeUntilArrival);
+        var validForm = this.validateForm(firstTrainTime, tFrequency);
+        if (validForm) {
+            // Call method tMinutes Until Arrival
+            var timeUntilArrival = this.tMinutesUntilArrival(firstTrainTime, tFrequency);
+            // Calls method next Train Arrival Time
+            var nextTrainTime = this.nextTrainArrivalTime(timeUntilArrival);
 
-        // Firebase Add
-        this.database.ref("trains/" + trainName).set ({
-            destination: destination,
-            frequency: tFrequency,
-            nextArrival: nextTrainTime,
-            nextArrivalMins: timeUntilArrival
-        })
+            // Firebase Add
+            this.database.ref("trains/" + trainName).set ({
+                destination: destination,
+                frequency: tFrequency,
+                nextArrival: nextTrainTime,
+                nextArrivalMins: timeUntilArrival
+            })
+            this.clearFields();
+        }
     },
 
     // METHOD to clear fields after train added
@@ -88,17 +92,33 @@ var TrainStation = {
         $("#destination-input").val(""),
         $("#first-train-time-input").val(""),
         $("#frequency-input").val("")
+        $("#first-train").removeClass("has-error");
+        $("#frequency").removeClass("has-error");
+    },
+
+    validateForm: function (ftrain, freq) {
+        var ftrainHours = ftrain.substr(0, ftrain.indexOf(":"));
+        var ftrainMins = ftrain.slice(-2);
+        if (ftrain === "" || ftrain.length > 5 || ftrain.length < 4 ||ftrain.indexOf(":") === -1 || ftrain.slice(-3, -2) != ":" ||isNaN(ftrainHours) || isNaN(ftrainMins) || ftrainHours > 23 || ftrainHours < 0 || ftrainMins > 59 || ftrainMins < 0) {
+            $("#first-train").addClass("has-error");
+            return false;
+        } else if (isNaN (freq) || freq < 1 || freq > 10080) {
+            $("#frequency").addClass("has-error");
+            return false;
+        } else {
+            return true;
+        }
     }
 }
 
 
 $("#add-train").on("click", function(e) {
+    e.preventDefault();
     TrainStation.addTrain(
         $("#train-name-input").val(),
         $("#destination-input").val(),
         $("#first-train-time-input").val(),
         $("#frequency-input").val())
-    TrainStation.clearFields();
 });
 
 
