@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Train Scheduler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- BOOTSTRAP - Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css" type="text/css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="jumbotron">
+                    <h1>Welcome to the Train Station!</h1>
+                    <p class="centered">Hop aboard...</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Current Train Schedule</div>
+                    <div class="panel-body">
+                        <div class="table">
+                            <table class="table table-striped" id="train-info">
+                                <tr>
+                                    <th>Train Name</th>
+                                    <th>Destination</th>
+                                    <th>Frequency (in mins)</th>
+                                    <th>Next Arrival</th>
+                                    <th>Minutes until Arrival</th>
+                                </tr>
+                                <!-- <tr>
+                                    <td>Aquarius Train</td>
+                                    <td>Dallas</td>
+                                    <td>15</td>
+                                    <td>5:30 PM</td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <td>Aquarius Train</td>
+                                    <td>Dallas</td>
+                                    <td>15</td>
+                                    <td>5:30 PM</td>
+                                    <td>10</td>
+                                </tr> -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Add Train</div>
+                    <div class="panel-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="trainName">Train Name</label>
+                                <input type="string" class="form-control" id="train-name-input" placeholder="Train Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="destination">Destination</label>
+                                <input type="string" class="form-control" id="destination-input" placeholder="Destination">
+                            </div>
+                            <div class="form-group">
+                                <label for="firstTrainTime">First Train Time (HH:MM - Military Time Format)</label>
+                                <input type="string" class="form-control" id="first-train-time-input" placeholder="Military Time - HH:MM">
+                            </div>
+                            <div class="form-group">
+                                <label for="frequency">Frequency (in mins)</label>
+                                <input type="number" class="form-control" id="frequency-input" placeholder="Frequency">
+                            </div>
+                            <button type="button" class="btn btn-primary" id="add-train">Add Train</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Google Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Moment.js -->
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.21.0/moment.min.js"></script>
+    <!-- Custom JS -->
+    <script src="./assets/javascript/script.js"></script>
+    
+</body>
+</html>
