@@ -68,8 +68,9 @@ var TrainStation = {
     // METHOD to add train to index.html and firebase
     addTrain: function (trainName, destination, firstTrainTime, tFrequency) {
         
-        var validForm = this.validateForm(firstTrainTime, tFrequency);
-        if (validForm) {
+        var validTrainTime = this.validateTrainTime(firstTrainTime);
+        var validFrequency = this.validateFrequency(tFrequency);
+        if (validTrainTime && validFrequency) {
             // Call method tMinutes Until Arrival
             var timeUntilArrival = this.tMinutesUntilArrival(firstTrainTime, tFrequency);
             // Calls method next Train Arrival Time
@@ -96,16 +97,24 @@ var TrainStation = {
         $("#frequency").removeClass("has-error");
     },
 
-    validateForm: function (ftrain, freq) {
+    validateTrainTime: function (ftrain) {
         var ftrainHours = ftrain.substr(0, ftrain.indexOf(":"));
         var ftrainMins = ftrain.slice(-2);
         if (ftrain === "" || ftrain.length > 5 || ftrain.length < 4 ||ftrain.indexOf(":") === -1 || ftrain.slice(-3, -2) != ":" ||isNaN(ftrainHours) || isNaN(ftrainMins) || ftrainHours > 23 || ftrainHours < 0 || ftrainMins > 59 || ftrainMins < 0) {
             $("#first-train").addClass("has-error");
             return false;
-        } else if (isNaN (freq) || freq < 1 || freq > 10080) {
+        } else {
+            $("#first-train").removeClass("has-error");
+            return true;
+        }
+    },
+
+    validateFrequency: function (freq) {
+        if (isNaN (freq) || freq < 1 || freq > 10080) {
             $("#frequency").addClass("has-error");
             return false;
         } else {
+            $("#frequency").removeClass("has-error");
             return true;
         }
     }
